@@ -45,7 +45,7 @@ class Cdh:
     def _AdditionstheoremSIN(self, x1, x2):
         return sin(x1) * cos(x2) + cos(x1) * sin(x2)
     def _convertToRad(self, deg):
-        print(type(deg))
+        #print(type(deg))
         if type(deg) == np.float16 or type(deg) == np.int64:
             return (pi/180)*deg
         if type(deg) == np.str_:
@@ -54,8 +54,31 @@ class Cdh:
         print("Wert nicht convertierbar in RAD")
         exit()
 
-_0T1 = Cdh(np.array(["q1", 0]), 2000, 0, np.array([90, 0]))
-pprint(_0T1.getTrans())
-_0T1.phi = np.array([0, 0])
-_0T1.calcTrans()
-pprint(_0T1.getTrans())
+def calcJacobiRot(_0t, _0ta, TCPVec, flac): #0t is whole Transformation; a=i-1; TCPVec= Matrix([0, 0, 0, 1]); if flac 1 --> first Element ez0 = [0,0,1] 0r0=[0,0,0]
+    _0rE = _0t * TCPVec
+    _0rE.row_del(3)
+    if flac:
+        _0r0 = Matrix([0,0,0])
+        _0e0 = Matrix([0,0,1])
+        trans = _0e0.cross(_0rE-_0r0) #geht nur mit 3 Zeilen 
+        Or = _0e0
+        return trans, Or
+
+    _0ri = _0ta.col(3) #4 Spalte
+    _0ri.row_del(3)
+    #pprint(_0ri)
+    _0ei = _0ta.col(2) #3 Spalte
+    _0ei.row_del(3)
+
+    #pprint(_0ei)
+    trans = _0ei.cross(_0rE-_0ri) #geht nur mit 3 Zeilen 
+    Or = _0ei
+    #pprint(trans)
+    return trans, Or
+def clalcJacobiTrans(_0ta, flac): #flac 1 --> first Element ez0 = [0,0,1]
+    if flac:
+        return Matrix([0,0,1]), Matrix([0,0,0])
+    
+    _0ei = _0ta.col(2) #3 Spalte
+    _0ei.row_del(3)
+    return _0ei, Matrix([0, 0, 0])
