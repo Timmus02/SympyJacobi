@@ -21,7 +21,7 @@ pprint(_0T3)
 
 trans1, Or1 = calcJacobiRot(_0T3, "", Matrix([0,0,0,1]), 1)
 trans2, Or2 = calcJacobiRot(_0T3, _0T1.getTrans(), Matrix([0,0,0,1]), 0)
-trans3, Or3 =clalcJacobiTrans(_0T2, 0)
+trans3, Or3 = calcJacobiTrans(_0T2, 0)
 
 print("######Jacobi#######")
 Jacobi = Matrix([ [trans1, trans2, trans3],

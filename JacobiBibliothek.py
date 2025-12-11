@@ -75,7 +75,7 @@ def calcJacobiRot(_0t, _0ta, TCPVec, flac): #0t is whole Transformation; a=i-1; 
     Or = _0ei
     #pprint(trans)
     return trans, Or
-def clalcJacobiTrans(_0ta, flac): #flac 1 --> first Element ez0 = [0,0,1]
+def calcJacobiTrans(_0ta, flac): #flac 1 --> first Element ez0 = [0,0,1]
     if flac:
         return Matrix([0,0,1]), Matrix([0,0,0])
     
