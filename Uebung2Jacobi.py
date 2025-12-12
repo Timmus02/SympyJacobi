@@ -2,13 +2,13 @@ from JacobiBibliothek import *
 import numpy as np
 from sympy import pprint, Matrix, simplify
 
-_0T1 = Cdh(np.array(["q1", 0]), 2000, 0, np.array([90, 0]))
-_1T2 = Cdh(np.array(["q2", 90]), 0, 0, np.array([90, 0]))
-_2T3 = Cdh(np.array([0, 0]), "d3", 0, np.array([0, 0]))
+_0T1 = Cdh(np.array(["q1", 0]), 2000, 0, 90)
+_1T2 = Cdh(np.array(["q2", 90]), 0, 0, 90)
+_2T3 = Cdh(np.array([0, 0]), "d3", 0, 0)
 
-#_0T1 = Cdh(np.array([0, 0]), 2000, 0, np.array([90, 0]))
-#_1T2 = Cdh(np.array([0, 90]), 0, 0, np.array([90, 0]))
-#_2T3 = Cdh(np.array([0, 0]), 1000, 0, np.array([0, 0]))
+#_0T1 = Cdh(np.array([0, 0]), 2000, 0, 90)
+#_1T2 = Cdh(np.array([0, 90]), 0, 0, 90)
+#_2T3 = Cdh(np.array([0, 0]), 1000, 0, 0)
 
 _0T2 = _0T1.getTrans() * _1T2.getTrans()
 _0T3 = _0T2 * _2T3.getTrans()
