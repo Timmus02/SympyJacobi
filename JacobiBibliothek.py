@@ -1,6 +1,61 @@
 from sympy import symbols, Matrix, cos, sin, pprint, trigsimp, pi
 import numpy as np
 
+def convertToRad(deg):
+        #print(type(deg))
+        if type(deg) == float or type(deg) == int:
+            return (pi/180)*deg
+        if type(deg) == str:
+            if deg.isdigit():
+                return (pi/180)*float(deg) 
+        print("Wert nicht convertierbar in RAD")
+        exit()
+
+class EulerABC:
+    alpha = 0
+    beta = 0
+    phi = 0
+    trans = Matrix()
+    transMatrix = Matrix
+    rot = Matrix()
+    alpha, beta, phi = symbols("alpha beta phi")
+
+    def __init__(self, _alpha, _beta, _phi, _trans):
+        self.alpha = _alpha
+        self.beta = _beta
+        self.phi = _phi
+        self.trans = _trans
+
+        self._clacRot()
+        self._calcHomogene()
+
+    def _calcHomogene(self):
+        self.transMatrix = Matrix([
+            [self.rot, self.trans],
+            [0, 0, 0, 1]
+            ])
+    def _clacRot(self):
+        print("calculation Rot")
+        alpha, phi, beta = self.alpha, self.phi, self.beta
+        if not type(self.phi) == str:
+            phi = convertToRad(self.phi)
+        if not type(self.alpha) == str:
+            alpha = convertToRad(self.alpha)
+        if not type(self.beta) == str:
+            beta = convertToRad(self.beta)
+
+        self.rot=Matrix([
+            [cos(alpha)*cos(beta), cos(alpha)*sin(beta)*sin(phi)-sin(alpha)*cos(phi), cos(alpha)*sin(beta)*cos(phi)+sin(alpha)*sin(phi)],
+            [sin(alpha)*cos(beta), sin(alpha)*sin(beta)*sin(phi)+cos(alpha)*cos(phi), sin(alpha)*sin(beta)*cos(phi)-cos(alpha)*sin(phi)],
+            [-sin(beta),           cos(beta)*sin(phi),                                cos(beta)*cos(phi)]
+        ])
+    
+    def getRot(self):
+        return self.rot
+    def getTrans(self):
+        self._clacRot
+        return self.transMatrix
+
 class Cdh:
     phi = np.empty(2)
     alpha = 0
