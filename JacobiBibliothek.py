@@ -98,7 +98,7 @@ class Cdh:
     def _AdditionstheoremSIN(self, x1, x2):
         return sin(x1) * cos(x2) + cos(x1) * sin(x2)
     def _convertToRad(self, deg):
-        print(type(deg))
+        #print(type(deg))
         if type(deg) == np.float16 or type(deg) == np.int64 or type(deg) == int:
             return (pi/180)*deg
         if type(deg) == np.str_:
